@@ -1,6 +1,6 @@
 
 buildscript {
-    
+
     ext {
         springBootVersion = "2.0.6.RELEASE"
     }
@@ -13,7 +13,6 @@ buildscript {
         mavenCentral()
     }
 }
-
 plugins {
     id 'java'
 }
@@ -26,4 +25,21 @@ apply plugin: 'org.springframework.boot'
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+}
+
+bootRun {
+    bootRun.environment([
+            "WELCOME_MESSAGE": "hello testing",
+    ])
+}
+
+test {
+    test.environment([
+            "WELCOME_MESSAGE": "Hello from test",
+            "CF_INSTANCE_INDEX":"",
+            "CF_INSTANCE_PORT":"",
+            "CF_INSTANCE_ADDR":"",
+            "CF_INSTANCE_MEMORY_LIMIT":"",
+    ])
 }
