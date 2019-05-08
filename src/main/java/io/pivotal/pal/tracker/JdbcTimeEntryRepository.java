@@ -43,8 +43,9 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
         return find(generatedKeyHolder.getKey().longValue());
     }
 
+
     @Override
-    public TimeEntry find(Long id) {
+    public TimeEntry find(long id) {
         return jdbcTemplate.query(
             "SELECT id, project_id, user_id, date, hours FROM time_entries WHERE id = ?",
             new Object[]{id},
@@ -57,7 +58,7 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
-    public TimeEntry update(Long id, TimeEntry timeEntry) {
+    public TimeEntry update(long id, TimeEntry timeEntry) {
         jdbcTemplate.update("UPDATE time_entries " +
                 "SET project_id = ?, user_id = ?, date = ?,  hours = ? " +
                 "WHERE id = ?",
@@ -71,7 +72,7 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         jdbcTemplate.update("DELETE FROM time_entries WHERE id = ?", id);
     }
 
